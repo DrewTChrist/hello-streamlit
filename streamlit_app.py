@@ -16,7 +16,7 @@ TORN = BASE + "/torn/"
 with st.form("data_form"):
     key = st.text_input("API Key", placeholder="Enter your API key")
     id = st.text_input("ID", placeholder="Enter an ID")
-    selections = st.selections("Selections", placeholder="Enter selections")
+    selections = st.text_input("Selections", placeholder="Enter selections")
     result = requests.get(USER + id + "&selections=" + selections + "&key=" + key)
     st.write(result.text)
     st.form_submit_button("Get data")
