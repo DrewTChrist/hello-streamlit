@@ -19,6 +19,7 @@ with st.form("data_form"):
     selections = st.selections("Selections", placeholder="Enter selections")
     result = requests.get(USER + id + "&selections=" + selections + "&key=" + key)
     st.write(result.text)
+    st.form_submit_button("Get data")
 
 
 
