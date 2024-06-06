@@ -21,7 +21,7 @@ with st.form("data_form"):
     selections = st.text_input("Selections", placeholder="Enter selections")
     text = ""
     if key != "" and id != "" and selections != "":
-        result = requests.get(USER + id + "&selections=" + selections + "&key=" + key)
+        result = requests.get(USER + id + "?selections=" + selections + "&key=" + key)
         text = result.text
     st.write(f"Result: {text}")
     st.form_submit_button("Get data")
