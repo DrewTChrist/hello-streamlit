@@ -13,12 +13,16 @@ COMPANY = BASE + "/company/"
 MARKET = BASE + "/market/"
 TORN = BASE + "/torn/"
 
+# {"error":{"code":2,"error":"Incorrect key"}}
+
 with st.form("data_form"):
     key = st.text_input("API Key", placeholder="Enter your API key")
     id = st.text_input("ID", placeholder="Enter an ID")
     selections = st.text_input("Selections", placeholder="Enter selections")
-    result = requests.get(USER + id + "&selections=" + selections + "&key=" + key)
-    st.write(result.text)
+    result = None
+    if key != "" and id != "" and selections != "":
+        result = requests.get(USER + id + "&selections=" + selections + "&key=" + key)
+    st.write(f"Result: {result.text}")
     st.form_submit_button("Get data")
 
 
