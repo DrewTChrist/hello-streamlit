@@ -11,7 +11,7 @@ def create_user(URL, name, player_id, api_key) -> int | None:
     cursor = connection.cursor()
 
     cursor.execute(
-        "INSERT INTO users (name, torn_id, api_key) VALUES (%s, %s, %s)", 
+        "INSERT INTO users (name, torn_id, api_key) VALUES (%s, %s, %s) RETURNING id;", 
         (name, player_id, api_key)
     )
 
@@ -34,8 +34,8 @@ def create_settings(URL, user_id):
 
     cursor = connection.cursor()
 
-    cursor.execute(
-        "INSERT INTO settings (user_id, show_plushies, show_flowers, show_meds, show_boosters) VALUES (%s, %s, %s, %s, %s)",
+    settings_id_created = cursor.execute(
+        "INSERT INTO settings (user_id, show_plushies, show_flowers, show_meds, show_boosters) VALUES (%s, %s, %s, %s, %s) RETURNING id;",
         (user_id, True, True, True, True)
     )
 
@@ -44,3 +44,5 @@ def create_settings(URL, user_id):
     connection_pool.putconn(connection)
 
     connection_pool.closeall()
+
+    return settings_id_created
