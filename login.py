@@ -33,12 +33,13 @@ if submit:
             st.session_state.api_key = api_key
             st.session_state.profile = resp_json
             try:
-                dal.create_user(
+                user_id = dal.create_user(
                     st.secrets["DB_STRING"],
                     st.session_state.profile["name"],
                     st.session_state.profile["player_id"],
                     st.session_state["api_key"]
                 )
+                dal.create_settings(st.secrets["DB_STRING"], user_id)
                 # update api key here?
             except dal.UniqueViolation:
                 pass
