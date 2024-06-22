@@ -39,10 +39,10 @@ if submit:
                     st.session_state.profile["player_id"],
                     st.session_state["api_key"]
                 )
+                dal.create_settings(st.secrets["DB_STRING"], user_id)
                 # update api key here?
             except dal.UniqueViolation:
                 pass
-            dal.create_settings(st.secrets["DB_STRING"], user_id)
             st.rerun()
     else:
         st.error("Error: API Key is empty")
