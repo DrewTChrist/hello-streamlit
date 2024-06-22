@@ -1,6 +1,4 @@
 import streamlit as st
-import requests
-import json
 
 login_page = st.Page("login.py", title="Login", default=True)
 edit_price_list = st.Page("edit_price_list.py", title="Edit Price List")
